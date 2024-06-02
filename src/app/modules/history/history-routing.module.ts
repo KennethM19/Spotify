@@ -4,7 +4,7 @@ import { HistoryPageComponent } from './pages/history-page/history-page.componen
 
 const routes: Routes = [
   {
-    path: 'history',
+    path: '',
     component: HistoryPageComponent
   }
 ];
