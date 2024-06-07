@@ -18,14 +18,13 @@ export class TrackService {
   }
 
   getAllRandom$(): Observable<any> {
-    return this.http.get(`${this.URL}/tracks001`).pipe(
+    return this.http.get(`${this.URL}/tracks`).pipe(
       map(({ data }: any) => {
         return data.reverse();
       }),
       catchError((err) => {
-        alert('Error de conexion');
         const { status, statusText } = err;
-        console.log('Algo paso revisar', [status, statusText]);
+        console.error('Error de conexión:', { status, statusText });
         return of([]);
       })
     );
