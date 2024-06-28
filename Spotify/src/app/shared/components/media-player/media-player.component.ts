@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
 import { MultimediaService } from '@shared/services/multimedia.service';
+import { response } from 'express';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -20,12 +21,14 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
   lisObserver$: Array<Subscription>=[]
   constructor(private multimediaService: MultimediaService) {}
   ngOnInit(): void {
-    const observer1$: Subscription = this.multimediaService.callback.subscribe(
-      (response: TrackModel) => {
-        console.log('Recibiendo cancion...', response);
+    const observer1$ = this.multimediaService.myObservable1$.subscribe(
+      (responseOK) => {
+        console.log('👍 El agua llegó perfecto!');
+      },
+      (responseFail) => {
+        console.log('😭 Se tapó la tubería');
       }
     );
-    this.lisObserver$ = [observer1$]
   }
   ngOnDestroy(): void {
       
